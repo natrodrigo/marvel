@@ -1,6 +1,6 @@
 ## Requisitos técnicos obrigatórios
 
-- A aplicação deve ser desenvolvida em React com Typescript.
+- A aplicação deve ser desenvolvida em React com Typescript. :white_check_mark:
 - Utilizar o git no github como versionador de código;
 - Escrever um README.md topzera, documentando o código que você escreveu e
 explicando como executar a aplicação;
