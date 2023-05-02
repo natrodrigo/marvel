@@ -3,7 +3,7 @@ import { useEffect, useContext, useState } from "react"
 import { useApi } from "../../hooks/useApi";
 import { AuthContext } from "../../context/Auth/AuthContext";
 
-interface Char {
+interface CharData {
     id: number,
     name: string,
     imageLink: string,
@@ -17,7 +17,7 @@ export const Char = () => {
     const api = useApi();
     const auth = useContext(AuthContext)
     const { id } = useParams();
-    const [char, setChar] = useState<Char>({
+    const [char, setChar] = useState<CharData>({
         id: 0,
         name: "",
         imageLink: "",
@@ -42,8 +42,8 @@ export const Char = () => {
                 name: char.name,
                 imageLink: char.thumbnail.path + "." + char.thumbnail.extension,
                 description: char.description,
-                series: char.series.items.map((item: any) => item.name),
-                details: char.urls.filter((item: any) => item.type === "wiki")[0]?.url
+                series: char.series.items.map((item: {name:string}) => item.name),
+                details: char.urls.filter((item: {type:string}) => item.type === "wiki")[0]?.url
             })
         }
     }
