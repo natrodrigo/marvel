@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useRef } from "react"
+import { useEffect, useContext, useState } from "react"
 import { useApi } from "../../hooks/useApi"
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { Input } from "../../components/Input";
@@ -6,6 +6,7 @@ import { ItemList } from "../../components/ItemList";
 import { Loading } from "../../components/Loading";
 import styled from "styled-components";
 import { Pagination } from "../../components/Pagination";
+
 
 interface Char {
     id: number,
