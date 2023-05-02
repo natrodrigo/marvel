@@ -26,11 +26,11 @@ do navegador e caso o usuário deseje alterá-las deve haver uma tela para isso;
 - Tela de listagem de personagens;:white_check_mark:
 - Busca pelo nome do personagem;:white_check_mark:
 - Tela detalhada do personagem;:white_check_mark:
-- Tela de listagem de quadrinhos;:x:
-- Busca pelo nome do quadrinho;:x:
+- Tela de listagem de quadrinhos;:white_check_mark:
+- Busca pelo nome do quadrinho;:white_check_mark:
 - Tela detalhada do quadrinho;:x:
-- Tela de listagem de criadores;:x:
-- Busca pelo nome do criador;:x:
+- Tela de listagem de criadores;:white_check_mark:
+- Busca pelo nome do criador;:white_check_mark:
 - Tela detalhada do criador;:x:
 
 
