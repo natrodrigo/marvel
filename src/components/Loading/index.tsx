@@ -1,6 +1,21 @@
 import styled from "styled-components";
 
 
+
+
+type Props = {
+    size?: number
+}
+
+export const Loading = (props: Props) => {
+    return (
+        <StyledDiv size={props.size || 20}>
+
+        </StyledDiv>
+
+    )
+}
+
 const StyledDiv = styled.div<{ size: number }>`
 
 width:${props => props.size}px;
@@ -21,16 +36,3 @@ animation: spin 2s linear infinite;
     transform: rotate(360deg);
   }
 }`
-
-type Props = {
-    size?: number
-}
-
-export const Loading = (props: Props) => {
-    return (
-        <StyledDiv size={props.size || 20}>
-
-        </StyledDiv>
-
-    )
-}

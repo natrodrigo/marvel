@@ -17,6 +17,8 @@ import {
 
 import { DefaultTheme } from "styled-components";
 import { Button } from "../Button";
+import { Link } from "react-router-dom";
+import { Navlink } from "../Navlink";
 
 interface Props {
     selected: string
@@ -88,6 +90,7 @@ export const Header = (props: Props) => {
     return (
         <StyledDiv>
             <StyledA href="http://marvel.com">Data provided by Marvel. © 2023 MARVEL</StyledA>
+            {props.selected && <Navlink/>}
             <div>
                 <StyledSelect name="Theme" id="" onChange={(e) => handleOnChange(e)}>
                     <option value="marvelDark">Marvel Dark</option>
