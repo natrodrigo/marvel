@@ -10,7 +10,7 @@ export const Navlink = () => {
         <MainContainer>
             <StyledLink to={"/char-list"}>Characters</StyledLink>
             <StyledLink to={"/creator-list"}>Creators</StyledLink>
-            <StyledLink to={"/hq-list"}>HQs</StyledLink>
+            <StyledLink to={"/hq-list"}>Comics</StyledLink>
         </MainContainer>
     )
 

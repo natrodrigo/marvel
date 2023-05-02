@@ -7,6 +7,13 @@ import { Loading } from "../../components/Loading";
 import styled from "styled-components";
 import { Pagination } from "../../components/Pagination";
 
+interface CustomParams  {
+    limit: number,
+    offset: number,
+    orderBy: string,
+    nameStartsWith?:string
+}
+
 interface Char {
     id: number,
     name: string,
@@ -14,19 +21,25 @@ interface Char {
 }
 
 interface ApiReturn {
-    [key: string]: any
+    id: number,
+    firstName: string,
+    thumbnail: {
+        path:string,
+        extension:string
+    }
 }
 
 export const CreatorList = () => {
     const api = useApi();
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
-    const [chars, setChars] = useState<Char[]>([]);
-    const [orderBy, setOrderBy] = useState("name")
+    const [creators, setCreators] = useState<Char[]>([]);
+    const [orderBy, setOrderBy] = useState("firstName")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
     const [totalItems, setTotalItems] = useState<null | number>(null);
+    
 
 
     useEffect(() =>{
@@ -35,29 +48,38 @@ export const CreatorList = () => {
 
     useEffect(() => {
         setLoading(true);
-        setChars([]);
+        setCreators([]);
+        setTotalItems(null)
 
-        const getChars = async () => {
-            const params = {
+        const getcreators = async () => {
+            const params: CustomParams = {
                 limit: 10,
-                offset: offset
+                offset: offset,
+                orderBy: orderBy,
             }
 
-            const response = await api.get("characters", auth.keys.public, auth.keys.private, orderBy, name, params)
+            if(name){
+                params.nameStartsWith = name
+            }
+            const response = await api.get("creators", auth.keys.public, auth.keys.private, params)
             if (response.data.results[0]) {
                 setTotalItems(response.data.total); 
                 const toStateObject: Char[] = response.data.results.map((item: ApiReturn) => {
                     return {
                         id: item.id,
-                        name: item.name,
+                        name: item.firstName,
                         imageLink: item.thumbnail.path + "." + item.thumbnail.extension
                     }
                 })
                 setLoading(false);
-                setChars(toStateObject)
+                setCreators(toStateObject)
+            }
+            else{
+                setLoading(false);
+                setCreators([]);
             }
         };
-        getChars();
+        getcreators();
 
 
     }, [name, offset])
@@ -85,7 +107,7 @@ export const CreatorList = () => {
 
     return (
         <>
-            <h2>Characters</h2>
+            <h2>Creators</h2>
             <Input label="Search By Name" onChange={e => { handleOnChange(e.target.value.trim()) }} id="name" />
             {loading &&
                 <LoadingDiv>
@@ -93,7 +115,8 @@ export const CreatorList = () => {
                 </LoadingDiv>
             }
 
-            <ItemList items={chars} />
+            <ItemList items={creators} />
+            { !creators[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&
                 <Pagination limit={10} total={totalItems} offset={offset} setOffset={setOffset} />
@@ -108,3 +131,5 @@ export const CreatorList = () => {
 const LoadingDiv = styled.div`
     margin-top:2em;
 `
+const StyledP = styled.p`
+margin-top:1em;`

@@ -7,6 +7,12 @@ import { Loading } from "../../components/Loading";
 import styled from "styled-components";
 import { Pagination } from "../../components/Pagination";
 
+interface CustomParams  {
+    limit: number,
+    offset: number,
+    orderBy: string,
+    nameStartsWith?:string
+}
 
 interface Char {
     id: number,
@@ -15,7 +21,12 @@ interface Char {
 }
 
 interface ApiReturn {
-    [key: string]: any
+    id: number,
+    name: string,
+    thumbnail: {
+        path:string,
+        extension:string
+    }
 }
 
 export const CharList = () => {
@@ -37,14 +48,20 @@ export const CharList = () => {
     useEffect(() => {
         setLoading(true);
         setChars([]);
+        setTotalItems(null)
 
         const getChars = async () => {
-            const params = {
+            const params: CustomParams = {
                 limit: 10,
-                offset: offset
+                offset: offset,
+                orderBy: orderBy,
             }
 
-            const response = await api.get("characters", auth.keys.public, auth.keys.private, orderBy, name, params)
+            if(name){
+                params.nameStartsWith = name
+            }
+
+            const response = await api.get("characters", auth.keys.public, auth.keys.private, params)
             if (response.data.results[0]) {
                 setTotalItems(response.data.total); 
                 const toStateObject: Char[] = response.data.results.map((item: ApiReturn) => {
@@ -56,6 +73,10 @@ export const CharList = () => {
                 })
                 setLoading(false);
                 setChars(toStateObject)
+            }
+            else{
+                setLoading(false);
+                setChars([]);
             }
         };
         getChars();
@@ -95,6 +116,7 @@ export const CharList = () => {
             }
 
             <ItemList items={chars} />
+            { !chars[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&
                 <Pagination limit={10} total={totalItems} offset={offset} setOffset={setOffset} />
@@ -109,3 +131,6 @@ export const CharList = () => {
 const LoadingDiv = styled.div`
     margin-top:2em;
 `
+
+const StyledP = styled.p`
+margin-top:1em;`

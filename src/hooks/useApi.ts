@@ -11,23 +11,17 @@ const api = axios.create({
 
 export const useApi = () => ({
 
-    get: async (endpoint: string, publicKey: string, privateKey: string, orderBy = "name", nameStarts = "", customParams: object = {}) => {
+    get: async (endpoint: string, publicKey: string, privateKey: string, customParams: object = {}) => {
         try {
             const ts = Number(new Date());
             const hash = md5(ts + privateKey + publicKey)
 
-            let params = Object.assign({
+            const params = Object.assign({
                 ts: ts,
                 apikey: publicKey,
                 hash: hash,
-                orderBy: orderBy
             }, customParams)
 
-            if(nameStarts !== ""){
-                params = Object.assign(params, {
-                    nameStartsWith:nameStarts
-                }) 
-            }
             const response = await api.get(endpoint, {
                 params: params
             })
