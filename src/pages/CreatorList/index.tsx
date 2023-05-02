@@ -115,7 +115,7 @@ export const CreatorList = () => {
                 </LoadingDiv>
             }
 
-            <ItemList items={creators} />
+            <ItemList endpoint="creator" items={creators} />
             { !creators[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&

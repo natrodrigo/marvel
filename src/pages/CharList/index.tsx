@@ -7,11 +7,11 @@ import { Loading } from "../../components/Loading";
 import styled from "styled-components";
 import { Pagination } from "../../components/Pagination";
 
-interface CustomParams  {
+interface CustomParams {
     limit: number,
     offset: number,
     orderBy: string,
-    nameStartsWith?:string
+    nameStartsWith?: string
 }
 
 interface Char {
@@ -24,8 +24,8 @@ interface ApiReturn {
     id: number,
     name: string,
     thumbnail: {
-        path:string,
-        extension:string
+        path: string,
+        extension: string
     }
 }
 
@@ -41,9 +41,9 @@ export const CharList = () => {
     const [totalItems, setTotalItems] = useState<null | number>(null);
 
 
-    useEffect(() =>{
+    useEffect(() => {
         setOffset(0);
-    },[name]);
+    }, [name]);
 
     useEffect(() => {
         setLoading(true);
@@ -57,13 +57,13 @@ export const CharList = () => {
                 orderBy: orderBy,
             }
 
-            if(name){
+            if (name) {
                 params.nameStartsWith = name
             }
 
             const response = await api.get("characters", auth.keys.public, auth.keys.private, params)
             if (response.data.results[0]) {
-                setTotalItems(response.data.total); 
+                setTotalItems(response.data.total);
                 const toStateObject: Char[] = response.data.results.map((item: ApiReturn) => {
                     return {
                         id: item.id,
@@ -74,7 +74,7 @@ export const CharList = () => {
                 setLoading(false);
                 setChars(toStateObject)
             }
-            else{
+            else {
                 setLoading(false);
                 setChars([]);
             }
@@ -115,8 +115,8 @@ export const CharList = () => {
                 </LoadingDiv>
             }
 
-            <ItemList items={chars} />
-            { !chars[0] && !loading && <StyledP>No data found.</StyledP>}
+            <ItemList endpoint="char" items={chars} />
+            {!chars[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&
                 <Pagination limit={10} total={totalItems} offset={offset} setOffset={setOffset} />

@@ -114,7 +114,7 @@ export const ComicList = () => {
                 </LoadingDiv>
             }
 
-            <ItemList items={comics} />
+            <ItemList endpoint="comic" items={comics} />
             { !comics[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&

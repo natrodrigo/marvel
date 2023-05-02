@@ -5,12 +5,13 @@ interface Props {
     id: number,
     name: string,
     imageLink: string,
+    endpoint:string,
 }
 
 export const Card = (props: Props) => {
     return (
         <Main>
-            <Link to={`/char/${props.id}`} key={props.id}>
+            <Link to={`/${props.endpoint}/${props.id}`} key={props.id}>
                 <Container>
                     <div>
                         <img src={props.imageLink} alt={props.name}></img>

@@ -13,6 +13,8 @@ import { Char } from "./pages/Char"
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/global";
 import { marvelDark } from "./styles/themes/themes"
+import { Comic } from "./pages/Comic";
+import { Creator } from "./pages/Creator";
 
 
 
@@ -30,11 +32,11 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<KeyForm setTheme={setTheme} />}></Route>
           <Route path="/char-list" element={<RequireAuth setTheme={setTheme}><CharList /></RequireAuth>}></Route>
-          <Route path="/hq-list" element={<RequireAuth setTheme={setTheme}><ComicList /></RequireAuth>}></Route>
+          <Route path="/comic-list" element={<RequireAuth setTheme={setTheme}><ComicList /></RequireAuth>}></Route>
           <Route path="/creator-list" element={<RequireAuth setTheme={setTheme}><CreatorList /></RequireAuth>}></Route>
           <Route path="/char/:id" element={<RequireAuth setTheme={setTheme}><Char /></RequireAuth>}></Route>
-          <Route path="/hq/:id" element={<RequireAuth setTheme={setTheme}><CreatorList /></RequireAuth>}></Route>
-          <Route path="/creator/:id" element={<RequireAuth setTheme={setTheme}><CreatorList /></RequireAuth>}></Route>
+          <Route path="/comic/:id" element={<RequireAuth setTheme={setTheme}><Comic /></RequireAuth>}></Route>
+          <Route path="/creator/:id" element={<RequireAuth setTheme={setTheme}><Creator /></RequireAuth>}></Route>
         </Routes>
       </BrowserRouter>
 

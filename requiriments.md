@@ -28,10 +28,10 @@ do navegador e caso o usuário deseje alterá-las deve haver uma tela para isso;
 - Tela detalhada do personagem;:white_check_mark:
 - Tela de listagem de quadrinhos;:white_check_mark:
 - Busca pelo nome do quadrinho;:white_check_mark:
-- Tela detalhada do quadrinho;:x:
+- Tela detalhada do quadrinho;:white_check_mark:
 - Tela de listagem de criadores;:white_check_mark:
 - Busca pelo nome do criador;:white_check_mark:
-- Tela detalhada do criador;:x:
+- Tela detalhada do criador;:white_check_mark:
 
 
 ## Funcionalidades desejáveis (Celestial)
