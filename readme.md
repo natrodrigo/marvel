@@ -6,6 +6,9 @@ Este projeto foi desenvolvido usando a API da Marvel. Sua documentação pode se
 ## Como acessar o projeto
 
 Este projeto foi hospedado online na Vercel. Você pode acessá-lo [aqui](https://marvel-ploo.vercel.app/).<br>
+
+>Obs: Por conta de uma configuração da Vercel que não pude modificar ainda, atualizar a página em certas rotas (rotas protegidas) retornará 404 para o usuário. Em outros ambientes, como o de desenvolvimento e AWS, por exemplo, o usuário é redirecionado para a página inicial, que é o comportamento esperado.
+
 É possível acessar também seu link no [Github](https://github.com/natrodrigo/marvel).
 
 Você pode fazer um `fork` deste projeto ou baixar seu código para executá-lo em sua máquina. Para isso, é preciso que você tenha o [Vite](https://vitejs.dev/guide/) instalado em seu computador.
@@ -31,7 +34,7 @@ Esta é a tela inicial onde devem ser informadas as suas chaves pública e priva
 
 Após inserir chaves, é possível acessar as funcionalidades desenvolvidas:
 
-![Funcionalidades]https://imgur.com/tuErEOR.png)
+![Funcionalidades](https://imgur.com/tuErEOR.png)
 
 Clicando nas setas azuis é possível **navegar entre as listas** de personagens, criadores e quadrinhos. 
 Em todas elas é possível **pesquisar pelo nome**, e é possível **ordenar os dados em outras sequências**, conforme os dados e possibilidades de cada lista.
