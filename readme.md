@@ -17,21 +17,21 @@ Depois de instalado, você deve usar os comandos:
 
 ## Navegando pelas telas do projeto
 
-![https://user-images.githubusercontent.com/57020127/236041305-17bbaf7d-f122-4b93-bce5-afa990802abd.png](Tela_inicial)
+![detalhada de personagem](https://user-images.githubusercontent.com/57020127/236041289-2aaea248-a7f4-4974-8244-518c58694b10.png)
 
 Esta é a tela inicial onde devem ser informadas as suas chaves pública e privada. Você pode conseguí-las criando uma conta Marvel.
 
 É preciso preencher ambas as chaves:
 
-![https://imgur.com/tJbacLm.png](Preencher_as_duas_chaves)
+![Preencher_as_duas_chaves](https://imgur.com/tJbacLm.png)
 
 É preciso que sejam válidas (é feita uma requisição na API para validá-las.):
 
-![https://imgur.com/JcRwtbQ.png](Chaves_precisam_ser_validadas)
+![Chaves_precisam_ser_validadas](https://imgur.com/JcRwtbQ.png)
 
 Após inserir chaves, é possível acessar as funcionalidades desenvolvidas:
 
-![https://imgur.com/tuErEOR.png](Funcionalidades)
+![Funcionalidades]https://imgur.com/tuErEOR.png)
 
 Clicando nas setas azuis é possível **navegar entre as listas** de personagens, criadores e quadrinhos. 
 Em todas elas é possível **pesquisar pelo nome**, e é possível **ordenar os dados em outras sequências**, conforme os dados e possibilidades de cada lista.
@@ -43,7 +43,7 @@ Temos disponíveis 9 temas de cores diferentes, e mais podem ser incluídos adic
 
 Clicando nos `Cards` de personagem/criador/quadrinho, destacados com uma seta laranja, é possível acessar uma tela com mais informações sobre eles, como nome, descrição, imagem, e uma prévia de seus dados. É possível também no fim da página acessar a Wiki oficial da Marvel para ver todas as informações possíveis:
 
-![https://imgur.com/BMaLyqR.png](tela_detalhada)
+![tela_detalhada](https://imgur.com/BMaLyqR.png)
 
 
 
