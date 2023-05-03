@@ -30,7 +30,7 @@ export const RequireAuth = (props: Props) => {
 
     return (
         <>
-            <Header selected="true"  setTheme={props.setTheme}/>
+            <Header setTheme={props.setTheme}/>
             <Container>
                 {props.children}
             </Container>

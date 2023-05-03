@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 
 interface Props {
-    selected: string
     setTheme: React.Dispatch<SetStateAction<DefaultTheme>>
 
 }
@@ -54,10 +53,10 @@ export const Header = (props: Props) => {
     return (
         <StyledDiv>
             <StyledA href="http://marvel.com">Data provided by Marvel. © 2023 MARVEL</StyledA>
-            {props.selected && <Navlink />}
+            {auth.keys.public && <Navlink />}
             <div>
                 <Select name="Theme" onChange={handleOnChange} options={options}></Select>
-                {props.selected &&
+                {auth.keys.public &&
                     <Button label="Change API Keys" onClick={() => { clearCookie() }}></Button>
                 }
             </div>

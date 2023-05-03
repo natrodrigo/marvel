@@ -36,7 +36,7 @@ do navegador e caso o usuário deseje alterá-las deve haver uma tela para isso;
 
 ## Funcionalidades desejáveis (Celestial)
 - Infinity scroll nas telas de listagem;:x:
-- Diferentes tipos de ordenação nas telas de listagem;:x:
+- Diferentes tipos de ordenação nas telas de listagem;:white_check_mark:
 - Filtro por criador na listagem de personagem;:x:
 - Filtro por criador na listagem de quadrinhos;:x:
 - Filtro por personagem na listagem de quadrinhos;:x:
@@ -59,7 +59,7 @@ criadores) ao interagir com a linha do tempo;:x:
 - Corrigir textos em português e mudar para inglês.:white_check_mark:
 - Melhorar CSS das telas específicas:white_check_mark:
 - Configurar orderBy:white_check_mark:
-- Melhorar código em geral criando uma uniformidade nas variáveis e etc;:x:
+- Melhorar código em geral criando uma uniformidade nas variáveis e etc;:white_check_mark:
 - Criar documentação :x:
 - Criar linha do tempo em caracters com as series e outras coisas deles:x:
 - Criar linha do tempo em creators com as novels criadas por eles:x:

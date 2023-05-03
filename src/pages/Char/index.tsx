@@ -59,9 +59,9 @@ export const Char = () => {
     }
 
     return (
-        <MainDiv>
+        <StyledDiv>
             <h2>Character: {char.name}</h2>
-            <p>Description: {char.name}</p>
+            <Description>Description:  {(char.description !== "null" && char.description !== "" ? char.description : char.name )}</Description>
             <Img src={char.imageLink} alt={char.name} />
 
             {char.series[0] &&
@@ -85,11 +85,11 @@ export const Char = () => {
 
             <p>This displayed data is just a preview. For more details, acess <StyledA href={char.details || "https://www.marvel.com/"} target="blank">Marvel Wiki.</StyledA></p>
             <Button label="Return" onClick={() => navigate(-1)} />
-        </MainDiv>
+        </StyledDiv>
     )
 }
 
-const MainDiv = styled.div`
+const StyledDiv = styled.div`
     display:flex;
     flex-direction:column;
     gap:1em;
@@ -98,10 +98,14 @@ const MainDiv = styled.div`
 
 const ItemList = styled.div`
 align-self:flex-start;
+width:40vw;
 `
 
 const Subtitle = styled.h3`
 margin:1em 0 .5em;
+`
+const Description = styled.div`
+width:40vw;
 `
 
 const Img = styled.img`

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useContext, useState} from "react"
+import { useEffect, useContext, useState } from "react"
 import { useApi } from "../../hooks/useApi"
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { Input } from "../../components/Input";
@@ -8,11 +8,11 @@ import { Loading } from "../../components/Loading";
 import styled from "styled-components";
 import { Pagination } from "../../components/Pagination";
 
-interface CustomParams  {
+interface CustomParams {
     limit: number,
     offset: number,
     orderBy: string,
-    nameStartsWith?:string
+    nameStartsWith?: string
 }
 
 interface Creator {
@@ -24,12 +24,13 @@ interface Creator {
 interface ApiReturn {
     id: number,
     firstName: string,
-    lastName:string,
+    lastName: string,
     thumbnail: {
-        path:string,
-        extension:string
+        path: string,
+        extension: string
     }
 }
+const LIMIT = 10;
 
 export const CreatorList = () => {
     const api = useApi();
@@ -41,12 +42,12 @@ export const CreatorList = () => {
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
     const [totalItems, setTotalItems] = useState<null | number>(null);
-    
 
 
-    useEffect(() =>{
+
+    useEffect(() => {
         setOffset(0);
-    },[name]);
+    }, [name]);
 
     useEffect(() => {
         setLoading(true);
@@ -55,17 +56,17 @@ export const CreatorList = () => {
 
         const getcreators = async () => {
             const params: CustomParams = {
-                limit: 10,
+                limit: LIMIT,
                 offset: offset,
                 orderBy: orderBy,
             }
 
-            if(name){
+            if (name) {
                 params.nameStartsWith = name
             }
             const response = await api.get("creators", auth.keys.public, auth.keys.private, params)
             if (response.data.results[0]) {
-                setTotalItems(response.data.total); 
+                setTotalItems(response.data.total);
                 const toStateObject: Creator[] = response.data.results.map((item: ApiReturn) => {
                     return {
                         id: item.id,
@@ -76,7 +77,7 @@ export const CreatorList = () => {
                 setLoading(false);
                 setCreators(toStateObject)
             }
-            else{
+            else {
                 setLoading(false);
                 setCreators([]);
             }
@@ -123,16 +124,16 @@ export const CreatorList = () => {
                 </Select>
             </OrderByContainer>
             {loading &&
-                <LoadingDiv>
+                <LoadingContainer>
                     <Loading size={80} />
-                </LoadingDiv>
+                </LoadingContainer>
             }
 
             <ItemList endpoint="creator" items={creators} />
-            { !creators[0] && !loading && <StyledP>No data found.</StyledP>}
+            {!creators[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&
-                <Pagination limit={10} total={totalItems} offset={offset} setOffset={setOffset} />
+                <Pagination limit={LIMIT} total={totalItems} offset={offset} setOffset={setOffset} />
             }
 
 
@@ -146,7 +147,7 @@ display:flex;
 gap:.5em;
 align-items:center;
 `
-const LoadingDiv = styled.div`
+const LoadingContainer = styled.div`
     margin-top:2em;
 `
 const StyledP = styled.p`

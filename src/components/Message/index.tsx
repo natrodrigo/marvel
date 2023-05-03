@@ -8,9 +8,10 @@ export const Message = (props: Props) => {
 
     return (
         <>
-            {props.visible && <StyledDiv>
-                {props.msg}
-            </StyledDiv>}
+            {props.visible &&
+                <StyledDiv>
+                    {props.msg}
+                </StyledDiv>}
         </>
 
 

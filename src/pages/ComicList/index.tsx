@@ -25,10 +25,13 @@ interface ApiReturn {
     id: number,
     title: string,
     thumbnail: {
-        path:string,
-        extension:string
+        path: string,
+        extension: string
     }
 }
+
+const LIMIT = 10;
+
 export const ComicList = () => {
     const api = useApi();
     const auth = useContext(AuthContext);
@@ -52,7 +55,7 @@ export const ComicList = () => {
 
         const getChars = async () => {
             const params: CustomParams = {
-                limit: 10,
+                limit: LIMIT,
                 offset: offset,
                 orderBy: orderBy,
             }
@@ -74,7 +77,7 @@ export const ComicList = () => {
                 setLoading(false);
                 setComics(toStateObject)
             }
-            else{
+            else {
                 setLoading(false);
                 setComics([]);
             }
@@ -121,16 +124,16 @@ export const ComicList = () => {
                 </Select>
             </OrderByContainer>
             {loading &&
-                <LoadingDiv>
+                <LoadingContainer>
                     <Loading size={80} />
-                </LoadingDiv>
+                </LoadingContainer>
             }
 
             <ItemList endpoint="comic" items={comics} />
-            { !comics[0] && !loading && <StyledP>No data found.</StyledP>}
+            {!comics[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&
-                <Pagination limit={10} total={totalItems} offset={offset} setOffset={setOffset} />
+                <Pagination limit={LIMIT} total={totalItems} offset={offset} setOffset={setOffset} />
             }
 
 
@@ -144,7 +147,7 @@ display:flex;
 gap:.5em;
 align-items:center;
 `
-const LoadingDiv = styled.div`
+const LoadingContainer = styled.div`
     margin-top:2em;
 `
 const StyledP = styled.p`

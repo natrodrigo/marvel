@@ -30,6 +30,8 @@ interface ApiReturn {
     }
 }
 
+const LIMIT = 10;
+
 export const CharList = () => {
     const api = useApi();
     const auth = useContext(AuthContext);
@@ -53,7 +55,7 @@ export const CharList = () => {
 
         const getChars = async () => {
             const params: CustomParams = {
-                limit: 10,
+                limit: LIMIT,
                 offset: offset,
                 orderBy: orderBy,
             }
@@ -121,16 +123,16 @@ export const CharList = () => {
             </OrderByContainer>
 
             {loading &&
-                <LoadingDiv>
+                <LoadingContainer>
                     <Loading size={80} />
-                </LoadingDiv>
+                </LoadingContainer>
             }
 
             <ItemList endpoint="char" items={chars} />
             {!chars[0] && !loading && <StyledP>No data found.</StyledP>}
             {
                 totalItems && !loading &&
-                <Pagination limit={10} total={totalItems} offset={offset} setOffset={setOffset} />
+                <Pagination limit={LIMIT} total={totalItems} offset={offset} setOffset={setOffset} />
             }
 
 
@@ -146,7 +148,7 @@ align-items:center;
 `
 
 
-const LoadingDiv = styled.div`
+const LoadingContainer = styled.div`
     margin-top:2em;
 `
 

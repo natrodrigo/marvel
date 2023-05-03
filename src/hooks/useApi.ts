@@ -36,18 +36,5 @@ export const useApi = () => ({
                 "status": 404
             }
         }
-    },
-
-    post: async (endpoint: string, body: object, uk: string) => {
-
-
-
-        try {
-            const response = await api.post(endpoint, body, { headers: { 'User-Key': uk } })
-            return response;
-        }
-        catch (err) {
-            //pass
-        }
-    },
+    }
 })

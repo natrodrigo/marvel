@@ -61,7 +61,7 @@ export const Creator = () => {
     return (
         <MainDiv>
             <h2>Creator Name: {creator.firstName}</h2>
-            <p>Full Name: {creator.fullName}</p>
+            <Description>Full Name: {creator.fullName}</Description>
             <Img src={creator.imageLink} alt={creator.firstName} />
 
             {creator.series[0] &&
@@ -98,9 +98,13 @@ const MainDiv = styled.div`
 
 const ItemList = styled.div`
 align-self:flex-start;
+width:40vw;
 `
 const Subtitle = styled.h3`
 margin:1em 0 .5em;
+`
+const Description = styled.div`
+width:40vw;
 `
 
 const Img = styled.img`

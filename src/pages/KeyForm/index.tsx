@@ -1,16 +1,23 @@
-import { useEffect, useState, useContext, SetStateAction } from "react"
-import { Input } from "../../components/Input"
-import { Button } from "../../components/Button"
-import { useCookie } from "../../hooks/useCookie"
-import { Loading } from "../../components/Loading"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useContext, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
+import { Loading } from "../../components/Loading";
+
+import { useCookie } from "../../hooks/useCookie";
 import { useApi } from "../../hooks/useApi"
-import { AuthContext } from "../../context/Auth/AuthContext"
-import { useNavigate } from "react-router-dom"
-import { Header } from "../../components/Header"
-import { Container } from "../../components/Container"
-import styled from "styled-components"
-import { DefaultTheme } from "styled-components"
-import { Message } from "../../components/Message"
+
+import { Header } from "../../components/Header";
+import { Container } from "../../components/Container";
+import { Message } from "../../components/Message";
+
+import { AuthContext } from "../../context/Auth/AuthContext";
+
+import styled from "styled-components";
+import { DefaultTheme } from "styled-components";
+
 
 
 
@@ -39,8 +46,7 @@ export const KeyForm = (props: Props) => {
 
     useEffect(() => {
         verifyIfValidCookieExists();
-
-    }, [])
+    }, []);
 
     const createCookie = (value: string, numberOfDays: number) => {
         cookieHook.setItem("keys", value, numberOfDays);
@@ -81,25 +87,25 @@ export const KeyForm = (props: Props) => {
                     public: publicKey,
                     private: privateKey
                 }
-                navigate("/char-list")
+                navigate("/char-list");
             }
             else {
                 setLoading(false);
 
-                setMessage({ msg: 'Invalid keys.', visible: true })
+                setMessage({ msg: 'Invalid keys.', visible: true });
                 setTimeout(() => {
-                    setMessage({ msg: "", visible: false })
-                }, 2000)
+                    setMessage({ msg: "", visible: false });
+                }, 2000);
             }
 
         }
         else {
-            //TODO - Criar depois um aviso de formulário decente!
             setLoading(false);
-            setMessage({ msg: 'You need to enter a public and private key', visible: true })
+
+            setMessage({ msg: 'You need to enter a public and private key', visible: true });
             setTimeout(() => {
-                setMessage({ msg: "", visible: false })
-            }, 2000)
+                setMessage({ msg: "", visible: false });
+            }, 2000);
         }
     }
 
@@ -114,17 +120,16 @@ export const KeyForm = (props: Props) => {
 
     return (
         <>
-            <Header selected="" setTheme={props.setTheme} />
+            <Header setTheme={props.setTheme} />
             <Container>
                 <>
                     {
                         !loading &&
-                        <StyledForm onSubmit={(e) => { handleFormSubmit(e) }}>
+                        <Form onSubmit={(e) => { handleFormSubmit(e) }}>
                             <Input id="public_key" label="Public Key" value={publicKey} onChange={e => setPublicKey(e.target.value.trim())} />
                             <Input id="secret_key" label="Private Key" value={privateKey} onChange={e => setPrivateKey(e.target.value.trim())} />
                             <Button label="Validar Chaves" onClick={() => { handleFormSubmit }} />
-
-                        </StyledForm>
+                        </Form>
                     }
 
                     {
@@ -132,7 +137,6 @@ export const KeyForm = (props: Props) => {
                     }
                     <Message visible={message.visible} msg={message.msg} />
                 </>
-
             </Container>
         </>
 
@@ -141,7 +145,7 @@ export const KeyForm = (props: Props) => {
 
 }
 
-const StyledForm = styled.form`
+const Form = styled.form`
     width:80%;
     display:flex;
     flex-direction:column;   

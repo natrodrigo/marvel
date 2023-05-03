@@ -3,20 +3,18 @@ import styled from "styled-components"
 
 
 
-
-
 export const Navlink = () => {
     return (
-        <MainContainer>
+        <StyledDiv>
             <StyledLink to={"/char-list"}>Characters</StyledLink>
             <StyledLink to={"/creator-list"}>Creators</StyledLink>
             <StyledLink to={"/comic-list"}>Comics</StyledLink>
-        </MainContainer>
+        </StyledDiv>
     )
 
 }
 
-const MainContainer = styled.div`
+const StyledDiv = styled.div`
 display:flex;
 gap: 10px;
 `

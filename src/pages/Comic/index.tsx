@@ -109,13 +109,14 @@ const MainDiv = styled.div`
 
 const ItemList = styled.div`
 align-self:flex-start;
+width:40vw;
 `
 
 const Subtitle = styled.h3`
 margin:1em 0 .5em;
 `
 const Description = styled.div`
-width:40%;
+width:40vw;
 `
 
 const Img = styled.img`
