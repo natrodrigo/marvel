@@ -8,6 +8,7 @@ import { DefaultTheme } from "styled-components";
 import { Button } from "../Button";
 import { Navlink } from "../Navlink";
 import { Select } from "../Select";
+import { useNavigate } from "react-router-dom";
 
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const Header = (props: Props) => {
+    const navigate = useNavigate();
     const auth = useContext(AuthContext);
     const cookieHook = useCookie();
 
@@ -26,12 +28,13 @@ export const Header = (props: Props) => {
     for (key in themes) {
         options.push(themes[key].title);
     }
-    const clearCookie = async () => {
+    const clearCookie = () => {
         cookieHook.clearCookie("keys");
         auth.keys = {
             public: "",
             private: ""
         }
+        navigate("/");
         location.reload();
     };
 

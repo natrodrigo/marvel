@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 
 import { RequireAuth } from "./context/Auth/RequireAuth"
@@ -16,6 +17,7 @@ import * as themes from "./styles/themes/themes"
 import { Comic } from "./pages/Comic";
 import { Creator } from "./pages/Creator";
 import { useCookie } from "./hooks/useCookie";
+import { AuthProvider } from "./context/Auth/AuthProvider";
 
 
 
@@ -35,22 +37,24 @@ export const App = () => {
     }
   }, [])
 
-  
+
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<KeyForm setTheme={setTheme} />}></Route>
-          <Route path="/char-list" element={<RequireAuth setTheme={setTheme}><CharList /></RequireAuth>}></Route>
-          <Route path="/comic-list" element={<RequireAuth setTheme={setTheme}><ComicList /></RequireAuth>}></Route>
-          <Route path="/creator-list" element={<RequireAuth setTheme={setTheme}><CreatorList /></RequireAuth>}></Route>
-          <Route path="/char/:id" element={<RequireAuth setTheme={setTheme}><Char /></RequireAuth>}></Route>
-          <Route path="/comic/:id" element={<RequireAuth setTheme={setTheme}><Comic /></RequireAuth>}></Route>
-          <Route path="/creator/:id" element={<RequireAuth setTheme={setTheme}><Creator /></RequireAuth>}></Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<KeyForm setTheme={setTheme} />}></Route>
+            <Route path="/char-list" element={<RequireAuth setTheme={setTheme}><CharList /></RequireAuth>}></Route>
+            <Route path="/comic-list" element={<RequireAuth setTheme={setTheme}><ComicList /></RequireAuth>}></Route>
+            <Route path="/creator-list" element={<RequireAuth setTheme={setTheme}><CreatorList /></RequireAuth>}></Route>
+            <Route path="/char/:id" element={<RequireAuth setTheme={setTheme}><Char /></RequireAuth>}></Route>
+            <Route path="/comic/:id" element={<RequireAuth setTheme={setTheme}><Comic /></RequireAuth>}></Route>
+            <Route path="/creator/:id" element={<RequireAuth setTheme={setTheme}><Creator /></RequireAuth>}></Route>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
 

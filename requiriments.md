@@ -50,3 +50,12 @@ criadores) ao interagir com a linha do tempo;:x:
 - As telas abrem em formato de modal;:x:
 - Dark mode;:white_check_mark:
 - Nos surpreender com uma funcionalidade criativa que não listamos.:white_check_mark:
+
+
+## Bugs conhecidos para corrigir e features:
+
+- Change API keys não está deslogando sempre. Quando na tela de caracter, ele não desloga e redireciona.
+- Configurar orderBy
+- Criar linha do tempo em caracters com as series e outras coisas deles
+- Criar linha do tempo em creators com as novels criadas por eles
+- Criar linha do tempo em comics com as séries 
