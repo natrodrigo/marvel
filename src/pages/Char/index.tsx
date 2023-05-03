@@ -65,22 +65,22 @@ export const Char = () => {
             <Img src={char.imageLink} alt={char.name} />
 
             {char.series[0] &&
-                <ListDiv>
+                <ItemList>
                     <Subtitle>Series Preview:</Subtitle>
                     {char.series.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                </ItemList>}
 
             {char.comics[0] &&
-                <ListDiv>
+                <ItemList>
                     <Subtitle>Comics Preview:</Subtitle>
-                    {char.comics.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {char.comics.map((serie, index) => { return <p key={"comic-" + index}> - {serie}</p> })}
+                </ItemList>}
 
             {char.events[0] &&
-                <ListDiv>
+                <ItemList>
                     <Subtitle>Events Preview:</Subtitle>
-                    {char.events.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {char.events.map((serie, index) => { return <p key={"event-" + index}> - {serie}</p> })}
+                </ItemList>}
 
 
             <p>This displayed data is just a preview. For more details, acess <StyledA href={char.details || "https://www.marvel.com/"} target="blank">Marvel Wiki.</StyledA></p>
@@ -96,7 +96,7 @@ const MainDiv = styled.div`
     align-items:center;
 `
 
-const ListDiv = styled.div`
+const ItemList = styled.div`
 align-self:flex-start;
 `
 
@@ -105,9 +105,13 @@ margin:1em 0 .5em;
 `
 
 const Img = styled.img`
-    width:20vw;
+    width:30vw;
     heigth:auto;
     margin-bottom:.5em;
+    border-left: 3vw solid ${props => props.theme.colors.tertiary};;
+    border-right: 3vw solid ${props => props.theme.colors.tertiary};;
+    border-top: 1vw solid ${props => props.theme.colors.tertiary};;
+    border-bottom: 1vw solid ${props => props.theme.colors.tertiary};
 `
 
 const StyledA = styled.a`

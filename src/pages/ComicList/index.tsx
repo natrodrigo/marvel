@@ -15,7 +15,7 @@ interface CustomParams {
     titleStartsWith?: string
 }
 
-interface Char {
+interface Comic {
     id: number,
     name: string,
     imageLink: string,
@@ -33,8 +33,8 @@ export const ComicList = () => {
     const api = useApi();
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
-    const [comics, setComics] = useState<Char[]>([]);
-    //const [orderBy, setOrderBy] = useState("title")
+    const [comics, setComics] = useState<Comic[]>([]);
+    const [orderBy, setOrderBy] = useState("title")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
@@ -54,7 +54,7 @@ export const ComicList = () => {
             const params: CustomParams = {
                 limit: 10,
                 offset: offset,
-                orderBy: "title",
+                orderBy: orderBy,
             }
 
             if (name) {
@@ -64,7 +64,7 @@ export const ComicList = () => {
             const response = await api.get("comics", auth.keys.public, auth.keys.private, params)
             if (response.data.results[0]) {
                 setTotalItems(response.data.total);
-                const toStateObject: Char[] = response.data.results.map((item: ApiReturn) => {
+                const toStateObject: Comic[] = response.data.results.map((item: ApiReturn) => {
                     return {
                         id: item.id,
                         name: item.title,
@@ -82,7 +82,7 @@ export const ComicList = () => {
         getChars();
 
 
-    }, [name, offset])
+    }, [name, offset, orderBy])
 
 
     useEffect(() => {
@@ -109,6 +109,17 @@ export const ComicList = () => {
         <>
             <h2>Comics</h2>
             <Input label="Search By Name" onChange={e => { handleOnChange(e.target.value.trim()) }} id="name" />
+            <OrderByContainer>
+                Order By:
+                <Select onChange={(e) => setOrderBy(e.target.value)}>
+                    <option value="title">⬆ Title</option>
+                    <option value="-title">⬇ Title</option>
+                    <option value="onsaleDate">⬆ On Sale Date</option>
+                    <option value="-onsaleDate">⬇ On Sale Date</option>
+                    <option value="modified"> ⬆ Modified</option>
+                    <option value="-modified">⬇ Modified</option>
+                </Select>
+            </OrderByContainer>
             {loading &&
                 <LoadingDiv>
                     <Loading size={80} />
@@ -127,9 +138,22 @@ export const ComicList = () => {
 
     )
 }
-
+const OrderByContainer = styled.div`
+margin:.5em;
+display:flex;
+gap:.5em;
+align-items:center;
+`
 const LoadingDiv = styled.div`
     margin-top:2em;
 `
 const StyledP = styled.p`
 margin-top:1em;`
+
+const Select = styled.select`
+padding:.5em;
+background-color:${props => props.theme.colors.secundary};
+color:${props => props.theme.colors.text};
+border:none;
+border-radius:5px;
+`

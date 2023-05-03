@@ -15,7 +15,7 @@ interface CustomParams  {
     nameStartsWith?:string
 }
 
-interface Char {
+interface Creator {
     id: number,
     name: string,
     imageLink: string,
@@ -24,6 +24,7 @@ interface Char {
 interface ApiReturn {
     id: number,
     firstName: string,
+    lastName:string,
     thumbnail: {
         path:string,
         extension:string
@@ -34,8 +35,8 @@ export const CreatorList = () => {
     const api = useApi();
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
-    const [creators, setCreators] = useState<Char[]>([]);
-    //const [orderBy, setOrderBy] = useState("firstName")
+    const [creators, setCreators] = useState<Creator[]>([]);
+    const [orderBy, setOrderBy] = useState("firstName")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
@@ -56,7 +57,7 @@ export const CreatorList = () => {
             const params: CustomParams = {
                 limit: 10,
                 offset: offset,
-                orderBy: "firstName",
+                orderBy: orderBy,
             }
 
             if(name){
@@ -65,10 +66,10 @@ export const CreatorList = () => {
             const response = await api.get("creators", auth.keys.public, auth.keys.private, params)
             if (response.data.results[0]) {
                 setTotalItems(response.data.total); 
-                const toStateObject: Char[] = response.data.results.map((item: ApiReturn) => {
+                const toStateObject: Creator[] = response.data.results.map((item: ApiReturn) => {
                     return {
                         id: item.id,
-                        name: item.firstName,
+                        name: (item.firstName !== "" ? item.firstName : "_") + " " + (item.lastName !== "" ? item.lastName : "_"),
                         imageLink: item.thumbnail.path + "." + item.thumbnail.extension
                     }
                 })
@@ -83,7 +84,7 @@ export const CreatorList = () => {
         getcreators();
 
 
-    }, [name, offset])
+    }, [name, offset, orderBy])
 
 
     useEffect(() => {
@@ -110,6 +111,17 @@ export const CreatorList = () => {
         <>
             <h2>Creators</h2>
             <Input label="Search By Name" onChange={e => { handleOnChange(e.target.value.trim()) }} id="name" />
+            <OrderByContainer>
+                Order By:
+                <Select onChange={(e) => setOrderBy(e.target.value)}>
+                    <option value="firstName">⬆ First Name</option>
+                    <option value="-firstName">⬇ First Name</option>
+                    <option value="lastName">⬆ Last Name</option>
+                    <option value="-lastName">⬇ Last Name</option>
+                    <option value="modified"> ⬆ Modified</option>
+                    <option value="-modified">⬇ Modified</option>
+                </Select>
+            </OrderByContainer>
             {loading &&
                 <LoadingDiv>
                     <Loading size={80} />
@@ -128,9 +140,22 @@ export const CreatorList = () => {
 
     )
 }
-
+const OrderByContainer = styled.div`
+margin:.5em;
+display:flex;
+gap:.5em;
+align-items:center;
+`
 const LoadingDiv = styled.div`
     margin-top:2em;
 `
 const StyledP = styled.p`
 margin-top:1em;`
+
+const Select = styled.select`
+padding:.5em;
+background-color:${props => props.theme.colors.secundary};
+color:${props => props.theme.colors.text};
+border:none;
+border-radius:5px;
+`

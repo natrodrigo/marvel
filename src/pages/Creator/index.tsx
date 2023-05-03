@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/Auth/AuthContext";
 import styled from "styled-components";
 import { Button } from "../../components/Button";
 
-interface CharData {
+interface creatorData {
     id: number,
     firstName: string,
     fullName: string,
@@ -24,7 +24,7 @@ export const Creator = () => {
     const navigate = useNavigate();
 
     const { id } = useParams();
-    const [char, setChar] = useState<CharData>({
+    const [creator, setCreator] = useState<creatorData>({
         id: 0,
         firstName: "",
         fullName: "",
@@ -44,46 +44,46 @@ export const Creator = () => {
         const response = await api.get(`creators/${id}`, auth.keys.public, auth.keys.private)
 
         if (response.data.results[0]) {
-            const char = response.data.results[0];
-            setChar({
-                id: char.id,
-                firstName: char.firstName,
-                fullName: char.fullName,
-                imageLink: char.thumbnail.path + "." + char.thumbnail.extension,
-                series: char.series && char.series.items ? char.series.items.map((item: { name: string }) => item.name) : [],
-                comics: char.comics && char.comics.items ? char.comics.items.map((item: { name: string }) => item.name) : [],
-                events: char.events && char.events.items ? char.events.items.map((item: { name: string }) => item.name) : [],
-                details: char.urls.filter((item: { type: string }) => item.type === "wiki")[0]?.url
+            const creator = response.data.results[0];
+            setCreator({
+                id: creator.id,
+                firstName: creator.firstName,
+                fullName: creator.fullName,
+                imageLink: creator.thumbnail.path + "." + creator.thumbnail.extension,
+                series: creator.series && creator.series.items ? creator.series.items.map((item: { name: string }) => item.name) : [],
+                comics: creator.comics && creator.comics.items ? creator.comics.items.map((item: { name: string }) => item.name) : [],
+                events: creator.events && creator.events.items ? creator.events.items.map((item: { name: string }) => item.name) : [],
+                details: creator.urls.filter((item: { type: string }) => item.type === "wiki")[0]?.url
             })
         }
     }
 
     return (
         <MainDiv>
-            <h2>Creator Name: {char.firstName}</h2>
-            <p>Full Name: {char.fullName}</p>
-            <Img src={char.imageLink} alt={char.firstName} />
+            <h2>Creator Name: {creator.firstName}</h2>
+            <p>Full Name: {creator.fullName}</p>
+            <Img src={creator.imageLink} alt={creator.firstName} />
 
-            {char.series[0] &&
-                <ListDiv>
+            {creator.series[0] &&
+                <ItemList>
                     <Subtitle>Series Preview:</Subtitle>
-                    {char.series.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {creator.series.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
+                </ItemList>}
 
-            {char.comics[0] &&
-                <ListDiv>
+            {creator.comics[0] &&
+                <ItemList>
                     <Subtitle>Comics Preview:</Subtitle>
-                    {char.comics.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {creator.comics.map((comic, index) => { return <p key={"comic-" + index}> - {comic}</p> })}
+                </ItemList>}
 
-            {char.events[0] &&
-                <ListDiv>
+            {creator.events[0] &&
+                <ItemList>
                     <Subtitle>Events Preview:</Subtitle>
-                    {char.events.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {creator.events.map((event, index) => { return <p key={"event-" + index}> - {event}</p> })}
+                </ItemList>}
 
 
-            <p>This displayed data is just a preview. For more details, acess <StyledA href={char.details || "https://www.marvel.com/"} target="blank">Marvel Wiki.</StyledA></p>
+            <p>This displayed data is just a preview. For more details, acess <StyledA href={creator.details || "https://www.marvel.com/"} target="blank">Marvel Wiki.</StyledA></p>
             <Button label="Return" onClick={() => navigate(-1)} />
         </MainDiv>
     )
@@ -96,7 +96,7 @@ const MainDiv = styled.div`
     align-items:center;
 `
 
-const ListDiv = styled.div`
+const ItemList = styled.div`
 align-self:flex-start;
 `
 const Subtitle = styled.h3`
@@ -104,9 +104,13 @@ margin:1em 0 .5em;
 `
 
 const Img = styled.img`
-    width:20vw;
-    heigth:auto;
-    margin-bottom:2em;
+width:30vw;
+heigth:auto;
+margin-bottom:.5em;
+border-left: 3vw solid ${props => props.theme.colors.tertiary};;
+border-right: 3vw solid ${props => props.theme.colors.tertiary};;
+border-top: 1vw solid ${props => props.theme.colors.tertiary};;
+border-bottom: 1vw solid ${props => props.theme.colors.tertiary};
 `
 
 const StyledA = styled.a`

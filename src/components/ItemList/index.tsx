@@ -1,10 +1,16 @@
 import { Card } from "../Card"
 
+interface Item {
+    id: number,
+    name: string,
+    imageLink: string,
+}
+
 interface Props {
-    items: any[],
+    items: Item[],
     loading?: boolean,
     error?: boolean,
-    endpoint:string
+    endpoint: string
 
 }
 

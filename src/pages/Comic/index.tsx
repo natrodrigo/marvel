@@ -25,7 +25,7 @@ export const Comic = () => {
     const navigate = useNavigate();
 
     const { id } = useParams();
-    const [char, setChar] = useState<CharData>({
+    const [comic, setComic] = useState<CharData>({
         id: 0,
         title: "",
         imageLink: "",
@@ -47,54 +47,54 @@ export const Comic = () => {
         const response = await api.get(`comics/${id}`, auth.keys.public, auth.keys.private)
 
         if (response.data.results[0]) {
-            const char = response.data.results[0];
-            
-            setChar({
-                id: char.id,
-                title: char.title,
-                imageLink: char.thumbnail.path + "." + char.thumbnail.extension,
-                description: char.description,
-                characters: char.characters && char.characters.items ? char.characters.items.map((item: { name: string }) => item.name) : [],
-                series: char.series && char.series.name ? [char.series.name] : [],
-                creators: char.creators && char.creators.items ? char.creators.items.map((item: { name: string }) => item.name) : [],
-                events: char.events && char.events.items ? char.events.items.map((item: { name: string }) => item.name) : [],
-                details: char.urls.filter((item: { type: string }) => item.type === "wiki")[0]?.url
+            const comic = response.data.results[0];
+
+            setComic({
+                id: comic.id,
+                title: comic.title,
+                imageLink: comic.thumbnail.path + "." + comic.thumbnail.extension,
+                description: decodeURIComponent(comic.description),
+                characters: comic.characters && comic.characters.items ? comic.characters.items.map((item: { name: string }) => item.name) : [],
+                series: comic.series && comic.series.name ? [comic.series.name] : [],
+                creators: comic.creators && comic.creators.items ? comic.creators.items.map((item: { name: string }) => item.name) : [],
+                events: comic.events && comic.events.items ? comic.events.items.map((item: { name: string }) => item.name) : [],
+                details: comic.urls.filter((item: { type: string }) => item.type === "wiki")[0]?.url
             })
         }
-    }   
+    }
 
     return (
         <MainDiv>
-            <h2>Comic: {char.title}</h2>
-            <p>Description: {char.title}</p>
-            <Img src={char.imageLink} alt={char.title} />
+            <h2>Comic: {comic.title}</h2>
+            <Description>Description: {(comic.description !== "null" && comic.description !== "" ? comic.description : comic.title )}</Description>
+            <Img src={comic.imageLink} alt={comic.title} />
 
-            
-            {char.characters[0] &&
-                <ListDiv>
+
+            {comic.characters[0] &&
+                <ItemList>
                     <Subtitle>Characters Preview:</Subtitle>
-                    {char.characters.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {comic.characters.map((characters, index) => { return <p key={"characters-" + index}> - {characters}</p> })}
+                </ItemList>}
 
-            {char.series[0] &&
-                <ListDiv>
+            {comic.series[0] &&
+                <ItemList>
                     <Subtitle>Series Preview:</Subtitle>
-                    {char.series.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {comic.series.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
+                </ItemList>}
 
-            {char.creators[0] &&
-                <ListDiv>
+            {comic.creators[0] &&
+                <ItemList>
                     <Subtitle>Creators Preview:</Subtitle>
-                    {char.creators.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {comic.creators.map((creator, index) => { return <p key={"creator-" + index}> - {creator}</p> })}
+                </ItemList>}
 
-            {char.events[0] &&
-                <ListDiv>
+            {comic.events[0] &&
+                <ItemList>
                     <Subtitle>Events Preview:</Subtitle>
-                    {char.events.map((serie, index) => { return <p key={"serie-" + index}> - {serie}</p> })}
-                </ListDiv>}
+                    {comic.events.map((event, index) => { return <p key={"event-" + index}> - {event}</p> })}
+                </ItemList>}
 
-            <p>This displayed data is just a preview. For more details, acess <StyledA href={char.details || "https://www.marvel.com/"} target="blank">Marvel Wiki.</StyledA></p>
+            <p>This displayed data is just a preview. For more details, acess <StyledA href={comic.details || "https://www.marvel.com/"} target="blank">Marvel Wiki.</StyledA></p>
             <Button label="Return" onClick={() => navigate(-1)} />
         </MainDiv>
     )
@@ -107,18 +107,25 @@ const MainDiv = styled.div`
     align-items:center;
 `
 
-const ListDiv = styled.div`
+const ItemList = styled.div`
 align-self:flex-start;
 `
 
 const Subtitle = styled.h3`
 margin:1em 0 .5em;
 `
+const Description = styled.div`
+width:40%;
+`
 
 const Img = styled.img`
-    width:20vw;
-    heigth:auto;
-    margin-bottom:2em;
+width:30vw;
+heigth:auto;
+margin-bottom:.5em;
+border-left: 3vw solid ${props => props.theme.colors.tertiary};;
+border-right: 3vw solid ${props => props.theme.colors.tertiary};;
+border-top: 1vw solid ${props => props.theme.colors.tertiary};;
+border-bottom: 1vw solid ${props => props.theme.colors.tertiary};
 `
 
 const StyledA = styled.a`

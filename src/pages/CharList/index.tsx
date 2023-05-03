@@ -35,7 +35,7 @@ export const CharList = () => {
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [chars, setChars] = useState<Char[]>([]);
-    //const [orderBy, setOrderBy] = useState("name")
+    const [orderBy, setOrderBy] = useState("name")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
@@ -55,7 +55,7 @@ export const CharList = () => {
             const params: CustomParams = {
                 limit: 10,
                 offset: offset,
-                orderBy: "name",
+                orderBy: orderBy,
             }
 
             if (name) {
@@ -83,7 +83,7 @@ export const CharList = () => {
         getChars();
 
 
-    }, [name, offset])
+    }, [name, offset, orderBy])
 
 
     useEffect(() => {
@@ -110,6 +110,16 @@ export const CharList = () => {
         <>
             <h2>Characters</h2>
             <Input label="Search By Name" onChange={e => { handleOnChange(e.target.value.trim()) }} id="name" />
+            <OrderByContainer>
+                Order By:
+                <Select onChange={(e) => setOrderBy(e.target.value)}>
+                    <option value="name">⬆ Name</option>
+                    <option value="-name">⬇ Name</option>
+                    <option value="modified"> ⬆ Modified</option>
+                    <option value="-modified">⬇ Modified</option>
+                </Select>
+            </OrderByContainer>
+
             {loading &&
                 <LoadingDiv>
                     <Loading size={80} />
@@ -128,6 +138,13 @@ export const CharList = () => {
 
     )
 }
+const OrderByContainer = styled.div`
+margin:.5em;
+display:flex;
+gap:.5em;
+align-items:center;
+`
+
 
 const LoadingDiv = styled.div`
     margin-top:2em;
@@ -135,3 +152,11 @@ const LoadingDiv = styled.div`
 
 const StyledP = styled.p`
 margin-top:1em;`
+
+const Select = styled.select`
+padding:.5em;
+background-color:${props => props.theme.colors.secundary};
+color:${props => props.theme.colors.text};
+border:none;
+border-radius:5px;
+`

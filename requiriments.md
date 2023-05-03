@@ -58,8 +58,9 @@ criadores) ao interagir com a linha do tempo;:x:
 - Verificar porque ao mudar tema ele está meio que relogando. Tem algo a ver com AuthContext?:white_check_mark:
 - Corrigir textos em português e mudar para inglês.:white_check_mark:
 - Melhorar CSS das telas específicas:white_check_mark:
-- Configurar orderBy:x:
+- Configurar orderBy:white_check_mark:
 - Melhorar código em geral criando uma uniformidade nas variáveis e etc;:x:
+- Criar documentação :x:
 - Criar linha do tempo em caracters com as series e outras coisas deles:x:
 - Criar linha do tempo em creators com as novels criadas por eles:x:
 - Criar linha do tempo em comics com as séries :x:
