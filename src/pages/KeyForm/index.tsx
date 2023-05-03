@@ -30,6 +30,8 @@ interface MessageProps {
     visible: boolean
 }
 
+const COOKIE_EXPIRE_TIME = 1;
+
 export const KeyForm = (props: Props) => {
     const navigate = useNavigate();
 
@@ -82,7 +84,7 @@ export const KeyForm = (props: Props) => {
 
             const valid = await verifyKeys(publicKey, privateKey)
             if (valid) {
-                createCookie(`public:${publicKey}, private:${privateKey}`, 1);
+                createCookie(`public:${publicKey}, private:${privateKey}`, COOKIE_EXPIRE_TIME);
                 auth.keys = {
                     public: publicKey,
                     private: privateKey
@@ -126,8 +128,8 @@ export const KeyForm = (props: Props) => {
                     {
                         !loading &&
                         <Form onSubmit={(e) => { handleFormSubmit(e) }}>
-                            <Input id="public_key" label="Public Key" value={publicKey} onChange={e => setPublicKey(e.target.value.trim())} />
-                            <Input id="secret_key" label="Private Key" value={privateKey} onChange={e => setPrivateKey(e.target.value.trim())} />
+                            <Input id="public_key" label="PUBLIC KEY" value={publicKey} onChange={e => setPublicKey(e.target.value.trim())} />
+                            <Input id="secret_key" label="PRIVATE KEY" value={privateKey} onChange={e => setPrivateKey(e.target.value.trim())} />
                             <Button label="Validar Chaves" onClick={() => { handleFormSubmit }} />
                         </Form>
                     }
