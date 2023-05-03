@@ -34,7 +34,7 @@ export const CharList = () => {
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [chars, setChars] = useState<Char[]>([]);
-    const [orderBy, setOrderBy] = useState("name")
+    //const [orderBy, setOrderBy] = useState("name")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
@@ -48,13 +48,13 @@ export const CharList = () => {
     useEffect(() => {
         setLoading(true);
         setChars([]);
-        setTotalItems(null)
+        setTotalItems(null);
 
         const getChars = async () => {
             const params: CustomParams = {
                 limit: 10,
                 offset: offset,
-                orderBy: orderBy,
+                orderBy: "name",
             }
 
             if (name) {

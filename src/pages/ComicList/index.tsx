@@ -33,7 +33,7 @@ export const ComicList = () => {
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [comics, setComics] = useState<Char[]>([]);
-    const [orderBy, setOrderBy] = useState("title")
+    //const [orderBy, setOrderBy] = useState("title")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
@@ -53,7 +53,7 @@ export const ComicList = () => {
             const params: CustomParams = {
                 limit: 10,
                 offset: offset,
-                orderBy: orderBy,
+                orderBy: "title",
             }
 
             if (name) {

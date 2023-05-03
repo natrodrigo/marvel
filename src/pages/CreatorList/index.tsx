@@ -34,7 +34,7 @@ export const CreatorList = () => {
     const auth = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [creators, setCreators] = useState<Char[]>([]);
-    const [orderBy, setOrderBy] = useState("firstName")
+    //const [orderBy, setOrderBy] = useState("firstName")
     const [name, setName] = useState("");
     const [timerId, setTimerId] = useState(0);
     const [offset, setOffset] = useState(0);
@@ -55,7 +55,7 @@ export const CreatorList = () => {
             const params: CustomParams = {
                 limit: 10,
                 offset: offset,
-                orderBy: orderBy,
+                orderBy: "firstName",
             }
 
             if(name){
