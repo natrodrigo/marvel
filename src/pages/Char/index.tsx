@@ -34,7 +34,6 @@ export const Char = () => {
 
     const getCharacter = async () => {
         const response = await api.get(`characters/${id}`, auth.keys.public, auth.keys.private)
-        console.log(response)
 
         if (response.data.results[0]) {
             const char = response.data.results[0];

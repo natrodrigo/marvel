@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react"
 import { useApi } from "../../hooks/useApi";
@@ -32,9 +33,7 @@ export const Creator = () => {
     }, [])
 
     const getCreator = async () => {
-        console.log(id)
         const response = await api.get(`creators/${id}`, auth.keys.public, auth.keys.private)
-        console.log(response)
 
         if (response.data.results[0]) {
             const char = response.data.results[0];

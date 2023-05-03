@@ -52,10 +52,13 @@ criadores) ao interagir com a linha do tempo;:x:
 - Nos surpreender com uma funcionalidade criativa que não listamos.:white_check_mark:
 
 
-## Bugs conhecidos para corrigir e features:
+## Bugs conhecidos para corrigir e features para incluir:
 
-- Change API keys não está deslogando sempre. Quando na tela de caracter, ele não desloga e redireciona.
-- Configurar orderBy
-- Criar linha do tempo em caracters com as series e outras coisas deles
-- Criar linha do tempo em creators com as novels criadas por eles
-- Criar linha do tempo em comics com as séries 
+- Change API keys não está deslogando sempre. Quando na tela de caracter, ele não desloga e redireciona.:white_check_mark: 
+- Verificar porque ao mudar tema ele está meio que relogando. Tem algo a ver com AuthContext?:white_check_mark:
+- Configurar orderBy:x:
+- Corrigir textos em português e mudar para inglês.:x:
+- Melhorar CSS das telas específicas:x:
+- Criar linha do tempo em caracters com as series e outras coisas deles:x:
+- Criar linha do tempo em creators com as novels criadas por eles:x:
+- Criar linha do tempo em comics com as séries :x:

@@ -17,7 +17,7 @@ import * as themes from "./styles/themes/themes"
 import { Comic } from "./pages/Comic";
 import { Creator } from "./pages/Creator";
 import { useCookie } from "./hooks/useCookie";
-import { AuthProvider } from "./context/Auth/AuthProvider";
+
 
 
 
@@ -39,7 +39,7 @@ export const App = () => {
 
 
   return (
-    <AuthProvider>
+
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <GlobalStyle />
@@ -54,7 +54,7 @@ export const App = () => {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
-    </AuthProvider>
+
   )
 }
 
