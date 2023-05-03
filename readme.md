@@ -17,7 +17,7 @@ Depois de instalado, você deve usar os comandos:
 
 ## Navegando pelas telas do projeto
 
-![https://i.imgur.com/xM6BdHN.png](Tela_inicial)
+![https://user-images.githubusercontent.com/57020127/236041305-17bbaf7d-f122-4b93-bce5-afa990802abd.png](Tela_inicial)
 
 Esta é a tela inicial onde devem ser informadas as suas chaves pública e privada. Você pode conseguí-las criando uma conta Marvel.
 
