@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { RequireAuth } from "./context/Auth/RequireAuth"
 import { KeyForm } from "./pages/KeyForm"
@@ -12,21 +12,32 @@ import { CreatorList } from "./pages/CreatorList"
 import { Char } from "./pages/Char"
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/global";
-import { marvelDark } from "./styles/themes/themes"
+import * as themes from "./styles/themes/themes"
 import { Comic } from "./pages/Comic";
 import { Creator } from "./pages/Creator";
-
-
+import { useCookie } from "./hooks/useCookie";
 
 
 
 export const App = () => {
-  const [theme, setTheme] = useState(marvelDark);
+  const cookieHook = useCookie();
+  const [theme, setTheme] = useState(themes.marvelDark);
 
+  useEffect(() => {
+    const themeName = cookieHook.getItem('themeName')
+    if (themeName) {
+      let key: keyof typeof themes;
+      for (key in themes) {
+        if (themes[key].title === themeName) {
+          setTheme(themes[key])
+        }
+      }
+    }
+  }, [])
+
+  
   return (
-
     <ThemeProvider theme={theme}>
-
       <BrowserRouter>
         <GlobalStyle />
         <Routes>
@@ -39,7 +50,6 @@ export const App = () => {
           <Route path="/creator/:id" element={<RequireAuth setTheme={setTheme}><Creator /></RequireAuth>}></Route>
         </Routes>
       </BrowserRouter>
-
     </ThemeProvider>
   )
 }

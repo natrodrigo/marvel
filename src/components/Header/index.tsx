@@ -2,87 +2,48 @@ import styled from "styled-components";
 import { useCookie } from "../../hooks/useCookie";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { useContext, SetStateAction } from "react"
-import {
-    marvelDark,
-    hulkLigth,
-    hulkDark,
-    ironLigth,
-    ironDark,
-    rogersLigth,
-    rogersDark,
-    thorLigth,
-    thorDark
-
-} from "../../styles/themes/themes";
+import * as themes from "../../styles/themes/themes";
 
 import { DefaultTheme } from "styled-components";
 import { Button } from "../Button";
-import { Link } from "react-router-dom";
 import { Navlink } from "../Navlink";
+import { Select } from "../Select";
+
 
 interface Props {
     selected: string
-
     setTheme: React.Dispatch<SetStateAction<DefaultTheme>>
 
 }
 
 export const Header = (props: Props) => {
     const auth = useContext(AuthContext);
-
     const cookieHook = useCookie();
 
+    const options: string[] = [];
 
+    let key: keyof typeof themes;
+    for (key in themes) {
+        options.push(themes[key].title);
+    }
     const clearCookie = async () => {
         cookieHook.clearCookie("keys");
         auth.keys = {
             public: "",
             private: ""
         }
-
         location.reload();
     };
 
     const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
-        let theme: DefaultTheme = marvelDark
-
-        switch (e.target.value) {
-
-            case "marvelDark":
-                theme = marvelDark;
-                break;
-
-            case "hulkLigth":
-                theme = hulkLigth;
-                break;
-            case "hulkDark":
-                theme = hulkDark;
-                break;
-
-            case "ironLigth":
-                theme = ironLigth;
-                break;
-            case "ironDark":
-                theme = ironDark;
-                break;
-
-            case "rogersLigth":
-                theme = rogersLigth;
-                break;
-            case "rogersDark":
-                theme = rogersDark;
-                break;
-
-            case "thorLigth":
-                theme = thorLigth;
-                break;
-            case "thorDark":
-                theme = thorDark;
+        let key: keyof typeof themes;
+        for (key in themes) {
+            if (themes[key].title === e.target.value) {
+                props.setTheme(themes[key])
+                cookieHook.setItem('themeName', themes[key].title,10)
+            }
         }
-
-
-        return props.setTheme(theme);
 
     }
 
@@ -90,19 +51,9 @@ export const Header = (props: Props) => {
     return (
         <StyledDiv>
             <StyledA href="http://marvel.com">Data provided by Marvel. © 2023 MARVEL</StyledA>
-            {props.selected && <Navlink/>}
+            {props.selected && <Navlink />}
             <div>
-                <StyledSelect name="Theme" id="" onChange={(e) => handleOnChange(e)}>
-                    <option value="marvelDark">Marvel Dark</option>
-                    <option value="hulkLigth">Hulk Ligth</option>
-                    <option value="hulkDark">Hulk Dark</option>
-                    <option value="ironLigth">Iron Man Ligth</option>
-                    <option value="ironDark">Iron Man Dark</option>
-                    <option value="rogersLigth">Rogers Ligth</option>
-                    <option value="rogersDark">Rogers Dark</option>
-                    <option value="thorLigth">Thor Ligth</option>
-                    <option value="thorDark">Thor Dark</option>
-                </StyledSelect>
+                <Select name="Theme" onChange={handleOnChange} options={options}></Select>
                 {props.selected &&
                     <Button label="Change API Keys" onClick={() => { clearCookie() }}></Button>
                 }
@@ -126,11 +77,4 @@ const StyledDiv = styled.div`
 const StyledA = styled.a`
 color:${props => props.theme.colors.text};
 font-weight:600;
-`
-const StyledSelect = styled.select`
-    padding:.8em;
-    border-radius:5px;
-    border:none;
-    color:${props => props.theme.colors.text};
-    background-color:${props => props.theme.colors.secundary};
 `

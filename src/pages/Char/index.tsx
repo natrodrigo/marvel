@@ -14,6 +14,7 @@ interface CharData {
 
 
 export const Char = () => {
+    
     const api = useApi();
     const auth = useContext(AuthContext)
     const { id } = useParams();
@@ -27,7 +28,6 @@ export const Char = () => {
     });
 
     useEffect(() => {
-
         getCharacter();
     }, [])
 
