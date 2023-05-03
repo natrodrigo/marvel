@@ -36,10 +36,10 @@ Após inserir chaves, é possível acessar as funcionalidades desenvolvidas:
 
 ![Funcionalidades](https://imgur.com/tuErEOR.png)
 
-Clicando nas setas azuis é possível **navegar entre as listas** de personagens, criadores e quadrinhos. 
+Clicando nos botões indicados pelas setas azuis é possível **navegar entre as listas** de personagens, criadores e quadrinhos. 
 Em todas elas é possível **pesquisar pelo nome**, e é possível **ordenar os dados em outras sequências**, conforme os dados e possibilidades de cada lista.
 
-Clicando no botão destacado pelo quadrado verde é possível trocar suas chaves de API. Estas chaves são armazenadas por 1 dia nos cookies do navegador do usuário e só serão requisitadas novamente ao entrar no aplicação caso expirem ou sejam deletadas. É possível mudar quanto tempo persistem no navegador no código da aplicação mudando o valor da variável `COOKIE_EXPIRE_TIME` no cabeçalho do arquivo `src/pages/KeyForm/KeyForm.tsx`.
+Clicando no botão destacado pelo quadrado verde é possível trocar suas chaves de API. Estas chaves são armazenadas por 1 dia nos cookies do navegador do usuário e só serão requisitadas novamente ao entrar na aplicação caso expirem ou sejam deletadas. É possível mudar quanto tempo persistem no navegador no código da aplicação mudando o valor da variável `COOKIE_EXPIRE_TIME` no cabeçalho do arquivo `src/pages/KeyForm/KeyForm.tsx`.
 
 Clicando no botão destacado pela seta verde é possível mudar o tema da aplicação, que foi feito inspirado nas cores de alguns heróis da Marvel. Esta escolha de tema também persiste nos cookies do navegador, mas por 10 dias.
 Temos disponíveis 9 temas de cores diferentes, e mais podem ser incluídos adicionando eles ao arquivo `src/styles/themes/themes.ts`.

@@ -16,5 +16,4 @@ body{
     color:${props => props.theme.colors.text};
 }
 
-
 `

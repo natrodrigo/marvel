@@ -111,7 +111,7 @@ export const ComicList = () => {
     return (
         <>
             <h2>Comics</h2>
-            <Input label="Search By Name" onChange={e => { handleOnChange(e.target.value.trim()) }} id="name" />
+            <Input label="Search By Title" onChange={e => { handleOnChange(e.target.value.trim()) }} id="name" />
             <OrderByContainer>
                 Order By:
                 <Select onChange={(e) => setOrderBy(e.target.value)}>

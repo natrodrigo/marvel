@@ -3,7 +3,7 @@
 - A aplicação deve ser desenvolvida em React com Typescript.:white_check_mark:
 - Utilizar o git no github como versionador de código;:white_check_mark:
 - Escrever um README.md topzera, documentando o código que você escreveu e
-explicando como executar a aplicação;:x:
+explicando como executar a aplicação;:white_check_mark:
 - As keys de autenticação não podem estar hardcodadas no código (veja como deve
 ser feito nas primeiras funcionalidades obrigatórias);:white_check_mark:
 - O código deve ser cheiroso, limpo, organizado e fácil de dar manutenção;:white_check_mark:
@@ -50,17 +50,3 @@ criadores) ao interagir com a linha do tempo;:x:
 - As telas abrem em formato de modal;:x:
 - Dark mode;:white_check_mark:
 - Nos surpreender com uma funcionalidade criativa que não listamos.:white_check_mark:
-
-
-## Bugs conhecidos para corrigir e features para incluir:
-
-- Change API keys não está deslogando sempre. Quando na tela de caracter, ele não desloga e redireciona.:white_check_mark: 
-- Verificar porque ao mudar tema ele está meio que relogando. Tem algo a ver com AuthContext?:white_check_mark:
-- Corrigir textos em português e mudar para inglês.:white_check_mark:
-- Melhorar CSS das telas específicas:white_check_mark:
-- Configurar orderBy:white_check_mark:
-- Melhorar código em geral criando uma uniformidade nas variáveis e etc;:white_check_mark:
-- Criar documentação :x:
-- Criar linha do tempo em caracters com as series e outras coisas deles:x:
-- Criar linha do tempo em creators com as novels criadas por eles:x:
-- Criar linha do tempo em comics com as séries :x:
